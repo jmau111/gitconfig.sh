@@ -1,0 +1,47 @@
+# env
+.env
+.env.local
+.env.local.php
+.env.*.local
+
+# Logs
+/log/
+
+# ignore node/grunt dependency directories
+node_modules/
+
+# ignore components loaded via Bower
+/bower_components
+
+# ignore OS generated files
+thumbs.db
+Thumbs.db
+.DS_Store
+
+# ignore Editor files
+/.idea
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+/.buildpath
+/.cache
+/.metadata
+/.project
+/.settings
+/.vscode
+atlassian*
+/nbproject
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# -------------------------
+# BEGIN Whitelisted Files
+# -------------------------
+
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!.phpcs.xml.dist
