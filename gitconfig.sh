@@ -48,7 +48,7 @@ function err() {
 
 main() {
 
-  local BACKUP_FOLDER="$HOME/giconfig-backups"
+  local BACKUP_FOLDER="$HOME/gitconfig-backups"
 
   while getopts "hb:e:u:" opt; do
     case "$opt" in 
