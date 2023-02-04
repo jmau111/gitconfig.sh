@@ -41,4 +41,4 @@ OPTIONS:
 
 ## Safety first
 
-As these files control Git, the script backups any existing config in `~/gitconfig-backups` before proceeding.
+As these files control Git, the script backs up any existing config in `~/gitconfig-backups` before proceeding.
