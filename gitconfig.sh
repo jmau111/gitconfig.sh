@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Credit : Julien maury
 
+# The script sets up Git configuration globally
+# and backs up the existing Git configuration files
+
 set -e
 set -u
 
