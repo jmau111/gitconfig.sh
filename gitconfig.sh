@@ -83,10 +83,10 @@ main() {
   for entry in $(ls .??*)
   do
     if [ -f "$HOME/$entry" ]; then
-      cp "$HOME/$entry" "$BACKUP_FOLDER"
+      cp -n "$HOME/$entry" "$BACKUP_FOLDER"
     fi
 
-    cp $entry $HOME
+    cp -n $entry $HOME
   done
 
   if [ -z "${GIT_USER_EMAIL-}" ] || [ -z "${GIT_USER_NAME-}" ]; then
@@ -97,7 +97,7 @@ main() {
   maybe_install_git
 
   if [ -f "$HOME/.gitconfig" ]; then
-    cp "$HOME/.gitconfig" "$BACKUP_FOLDER"
+    cp -n "$HOME/.gitconfig" "$BACKUP_FOLDER"
   fi
 
   configure_git "${GIT_DEFAULT_BRANCH-main}" "$GIT_USER_EMAIL" "$GIT_USER_NAME"
