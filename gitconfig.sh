@@ -105,4 +105,4 @@ main() {
   git config --global --list
 }
 
-main "$@" || exit 1
+main "$@"
