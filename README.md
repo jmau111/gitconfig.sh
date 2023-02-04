@@ -1,6 +1,6 @@
 # gitconfig.sh
 
-Light Bash script to configure your Linux/Unix machine. It contains a short list of configuration files and commands you might need to start.
+Light Bash script to configure your Linux/Unix machine for Git. It contains a short list of configuration files and commands you might need to start.
 
 ## Disclaimer
 
@@ -38,16 +38,6 @@ OPTIONS:
 
 * `.gitconfig`: main config file for your Git activities (the script only overrides some settings and add a few aliases)
 * `.gitignore_global`: main config file for all files that should be ignored by Git
-* `.bash_aliases`: examples of helpful aliases and overrides
-* `.pylintrc`: main config files for Python Linting
-
-Ensure the `.bash_aliases` file is loaded in your `.bashrc` (it's usually the case, but check it anyway):
-
-```bash
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-```
 
 ## Safety first
 
