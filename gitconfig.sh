@@ -108,4 +108,4 @@ main() {
   git config --global --list
 }
 
-main "$@"
+main
