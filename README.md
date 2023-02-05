@@ -6,13 +6,12 @@ Light Bash script to configure your Linux/Unix machine for Git. It contains a sh
 
 1. it should be compatible with most Linux distributions and Unix-like systems
 2. configs are minimalist on purpose
-3. the name of this repo is just another acronym, nothing suspicious
 
 ## How to use
 
 ```
-git clone https://github.com/jmau111/gitconfig.sh
-cd gitconfig.sh
+git clone https://github.com/jmau111/gitconfig.sh gitconfig
+cd gitconfig
 chmod +x gitconfig.sh
 ./gitconfig.sh -b "main" -e "myemail@mysite.com" -u "The Undertaker"
 ```
