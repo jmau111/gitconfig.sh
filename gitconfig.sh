@@ -15,10 +15,10 @@ USAGE:
     bash $(basename $0) [ -b BRANCH_NAME ] [ -e "EMAIL" ] [ -u "USERNAME" ]
 
 OPTIONS:
+      -h  Usage
       -b  The default branch name (default is "main")
       -e  required: The email that will be associated with commits
       -u  required: The name that will be associated with commits
-      -h  Usage
 EOF
 }
 
