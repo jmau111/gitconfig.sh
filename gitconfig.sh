@@ -45,7 +45,7 @@ function configure_git() {
 }
 
 function err() {
-  echo -e "\e[1;31m $1 \033[0m" >&2
+  echo -e "\e[1;31m$1\033[0m" >&2
   echo
 }
 
@@ -104,7 +104,7 @@ main() {
 
   clear
   cd -
-  echo -e "\033[32m done:\033[0m"
+  echo -e "\033[32mdone:\033[0m"
   git config --global --list
 }
 
