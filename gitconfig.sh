@@ -22,9 +22,14 @@ OPTIONS:
 EOF
 }
 
+function err() {
+  echo -e "\e[1;31m$1\033[0m" >&2
+  echo
+}
+
 maybe_install_git() {
   if ! [ -x "$(command -v git)" ]; then
-    sudo apt install -y git
+    err "I need Git. Please install it on your system. For example 'sudo apt install -y git' on Debian"
   fi
 }
 
@@ -42,11 +47,6 @@ function configure_git() {
   git config --global alias.lg "log --color --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
   git config --global alias.optimize "repack -a -d --depth=250"
   git config --global alias.grep '!git ls-files | grep -i'
-}
-
-function err() {
-  echo -e "\e[1;31m$1\033[0m" >&2
-  echo
 }
 
 main() {
