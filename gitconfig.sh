@@ -4,9 +4,6 @@
 # The script sets up Git configuration globally
 # and backs up the existing Git configuration files
 
-set -e
-set -u
-
 function usage() {
     cat 1>&2 <<EOF
 The installer for $(basename $0)
