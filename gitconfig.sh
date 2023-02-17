@@ -4,6 +4,8 @@
 # The script sets up Git configuration globally
 # and backs up the existing Git configuration files
 
+trap 'echo "Error: script failed" >&2; exit 1' ERR
+
 function usage() {
     cat 1>&2 <<EOF
 The installer for $(basename $0)
