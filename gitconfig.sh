@@ -4,7 +4,7 @@
 # The script sets up Git configuration globally
 # and backs up the existing Git configuration files
 
-trap 'echo "Error: script failed" >&2; exit 1' ERR
+trap 'echo -e "\033[31mError: script failed\033[0m" >&2; exit 1' ERR
 
 function usage() {
     cat 1>&2 <<EOF
