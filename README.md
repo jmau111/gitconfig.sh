@@ -24,12 +24,12 @@ You can specify the name and the email you want to associate with your commits. 
 The installer for gitconfig.sh
 
 USAGE:
-    ./gitconfig.sh [ -b BRANCH_NAME ] [ -e "EMAIL" ] [ -u "USERNAME" ]
+    ./gitconfig.sh [ -b BRANCH_NAME ] [ -e "EMAIL" ] [ -u "USER_NAME" ]
 
 OPTIONS:
       -h  Usage
       -b  The default branch name (default is "main")
-      -u  required: The name that will be associated with commits
+      -u  required: The name that will be associated with commits (e.g, "Martin Scorcese")
       -e  required: The email that will be associated with commits
 ```
 
