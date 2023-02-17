@@ -4,31 +4,31 @@
 # The script sets up Git configuration globally
 # and backs up the existing Git configuration files
 
-trap 'echo -e "\033[31mError: script failed\033[0m" >&2; exit 1' ERR
+trap 'err=$?; echo >&2 -e "\e[1;31mThe script catched this unusual error\033[0m"; exit $err' ERR
 
 function usage() {
     cat 1>&2 <<EOF
 The installer for $(basename $0)
 
 USAGE:
-    bash $(basename $0) [ -b BRANCH_NAME ] [ -e "EMAIL" ] [ -u "USERNAME" ]
+    ./$(basename $0) [ -b "BRANCH_NAME" ] [ -e "EMAIL" ] [ -u "USER_NAME" ]
 
 OPTIONS:
       -h  Usage
       -b  The default branch name (default is "main")
       -e  required: The email that will be associated with commits
-      -u  required: The name that will be associated with commits
+      -u  required: The name that will be associated with commits (e.g, "Martin Scorcese")
 EOF
 }
 
 function err() {
   echo -e "\e[1;31m$1\033[0m" >&2
-  echo
 }
 
 maybe_install_git() {
   if ! [ -x "$(command -v git)" ]; then
     err "I need Git. Please install it on your system. For example 'sudo apt install -y git' on Debian"
+    exit 1
   fi
 }
 
@@ -48,63 +48,59 @@ function configure_git() {
   git config --global alias.grep '!git ls-files | grep -i'
 }
 
-main() {
+BACKUP_FOLDER="$HOME/gitconfig-backups"
 
-  local BACKUP_FOLDER="$HOME/gitconfig-backups"
-
-  while getopts "hb:e:u:" opt; do
-    case "$opt" in 
-      b) 
-        local GIT_DEFAULT_BRANCH=${OPTARG}
-        ;;
-      e) 
-        local GIT_USER_EMAIL=${OPTARG}
-        ;;
-      u) 
-        local GIT_USER_NAME=${OPTARG}
-        ;;
-      h) 
-        usage;
-        exit 0
-        ;;
-      : )
-        err "No parameter provided"
-        usage;
-        exit 1
+while getopts "hb:e:u:" opt; do
+  case "$opt" in 
+    b) 
+      GIT_DEFAULT_BRANCH=${OPTARG}
       ;;
-    esac
-  done
+    e) 
+      GIT_USER_EMAIL=${OPTARG}
+      ;;
+    u) 
+      GIT_USER_NAME=${OPTARG}
+      ;;
+    h) 
+      usage;
+      exit 0
+      ;;
+    : )
+      err "No parameter provided"
+      usage;
+      exit 1
+    ;;
+  esac
+done
 
-  shift $((OPTIND-1)) # clear options
+shift $((OPTIND-1)) # clear options
 
-  mkdir -p "$BACKUP_FOLDER"
-  cd "$PWD/files"
-  for entry in $(ls .??*)
-  do
-    if [ -f "$HOME/$entry" ]; then
-      cp -n "$HOME/$entry" "$BACKUP_FOLDER"
-    fi
-
-    cp -n $entry $HOME
-  done
-
-  if [ -z "${GIT_USER_EMAIL-}" ] || [ -z "${GIT_USER_NAME-}" ]; then
-    usage
-    exit 1
+mkdir -p "$BACKUP_FOLDER"
+cd "$PWD/files"
+for entry in $(find . -type f -name '\.*' -print)
+do
+  if [ -f "$HOME/$entry" ]; then
+    cp -n "$HOME/$entry" "$BACKUP_FOLDER"
   fi
 
-  maybe_install_git
+  cp -n $entry $HOME
+done
 
-  if [ -f "$HOME/.gitconfig" ]; then
-    cp -n "$HOME/.gitconfig" "$BACKUP_FOLDER"
-  fi
+if [ -z "${GIT_USER_EMAIL-}" ] || [ -z "${GIT_USER_NAME-}" ]; then
+  err "The script failed to set variables for user email and name"
+  usage
+  exit 1
+fi
 
-  configure_git "${GIT_DEFAULT_BRANCH-main}" "$GIT_USER_EMAIL" "$GIT_USER_NAME"
+maybe_install_git
 
-  clear
-  cd -
-  echo -e "\033[32mdone:\033[0m"
-  git config --global --list
-}
+if [ -f "$HOME/.gitconfig" ]; then
+  cp -n "$HOME/.gitconfig" "$BACKUP_FOLDER"
+fi
 
-main
+configure_git "${GIT_DEFAULT_BRANCH-main}" "$GIT_USER_EMAIL" "$GIT_USER_NAME"
+
+clear
+cd -
+echo -e "\033[32mdone:\033[0m"
+git config --global --list
