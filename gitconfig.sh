@@ -6,13 +6,21 @@
 
 trap 'err=$?; echo >&2 -e "\e[1;31mThe script catched this unusual error\033[0m"; exit $err' ERR
 
+function header() {
+  echo '       _ _                   __ _             _'
+  echo '  __ _(_) |_ ___ ___  _ __  / _(_) __ _   ___| |__'
+  echo ' / _` | | __/ __/ _ \| `_ \| |_| |/ _` | / __| `_  \'
+  echo '| (_| | | || (_| (_) | | | |  _| | (_| |_\__ \ | | |'
+  echo ' \__, |_|\__\___\___/|_| |_|_| |_|\__, (_)___/_| |_|'
+  echo ' |___/                            |___/'
+}
+
 function usage() {
     cat 1>&2 <<EOF
-The installer for $(basename $0)
+$(header)
 
 USAGE:
     ./$(basename $0) [ -b "BRANCH_NAME" ] [ -e "EMAIL" ] [ -u "USER_NAME" ]
-
 OPTIONS:
       -h  Usage
       -b  The default branch name (default is "main")
